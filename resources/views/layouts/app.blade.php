@@ -30,9 +30,9 @@
             border-radius: 50%; pointer-events: none; z-index: 0;
             animation: drift3 28s ease-in-out infinite;
         }
-        @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(3%,5%) scale(1.05)} 66%{transform:translate(-2%,-3%) scale(0.98)} }
-        @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-4%,3%) scale(1.08)} }
-        @keyframes drift3 { 0%,100%{transform:translate(-50%,-50%) scale(1)} 40%{transform:translate(-52%,-48%) scale(1.1)} 70%{transform:translate(-48%,-52%) scale(0.95)} }
+        @@keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(3%,5%) scale(1.05)} 66%{transform:translate(-2%,-3%) scale(0.98)} }
+        @@keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-4%,3%) scale(1.08)} }
+        @@keyframes drift3 { 0%,100%{transform:translate(-50%,-50%) scale(1)} 40%{transform:translate(-52%,-48%) scale(1.1)} 70%{transform:translate(-48%,-52%) scale(0.95)} }
 
         .glass-card {
             background: rgba(15,23,42,0.6);
@@ -54,11 +54,11 @@
         .answer-btn:hover { transform: scale(1.08); }
         .answer-btn.picked { transform: scale(1.1); }
 
-        @keyframes fadeInUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-        @keyframes scaleIn { from { opacity:0; transform:scale(0.9); } to { opacity:1; transform:scale(1); } }
-        @keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
-        @keyframes countUp { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform:translateY(0); } }
+        @@keyframes fadeInUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        @@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @@keyframes scaleIn { from { opacity:0; transform:scale(0.9); } to { opacity:1; transform:scale(1); } }
+        @@keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+        @@keyframes countUp { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
         .fade-in-up { animation: fadeInUp 0.5s ease forwards; }
         .fade-in { animation: fadeIn 0.4s ease forwards; }

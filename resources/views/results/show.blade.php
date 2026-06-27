@@ -4,15 +4,15 @@
 
 @push('styles')
 <style>
-    @keyframes popIn { 0%{transform:scale(0.5);opacity:0} 70%{transform:scale(1.08)} 100%{transform:scale(1);opacity:1} }
-    @keyframes slideUp { from{transform:translateY(30px);opacity:0} to{transform:translateY(0);opacity:1} }
-    @keyframes barFill { from{width:0%} to{width:{{ $submission->percentage }}%} }
-    @keyframes confettiFall {
+    @@keyframes popIn { 0%{transform:scale(0.5);opacity:0} 70%{transform:scale(1.08)} 100%{transform:scale(1);opacity:1} }
+    @@keyframes slideUp { from{transform:translateY(30px);opacity:0} to{transform:translateY(0);opacity:1} }
+    @@keyframes barFill { from{width:0%} to{width:{{ $submission->percentage }}%} }
+    @@keyframes confettiFall {
         0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
         100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
     }
-    @keyframes numberCount { from { opacity:0; transform:scale(0.5); } to { opacity:1; transform:scale(1); } }
-    @keyframes ringPulse { 0%,100%{ box-shadow: 0 0 0 0 rgba(var(--ring-color), 0.4); } 50%{ box-shadow: 0 0 0 12px rgba(var(--ring-color), 0); } }
+    @@keyframes numberCount { from { opacity:0; transform:scale(0.5); } to { opacity:1; transform:scale(1); } }
+    @@keyframes ringPulse { 0%,100%{ box-shadow: 0 0 0 0 rgba(var(--ring-color), 0.4); } 50%{ box-shadow: 0 0 0 12px rgba(var(--ring-color), 0); } }
 
     .grade-circle { animation: popIn 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards; }
     .stat-card { animation: slideUp 0.5s ease forwards; opacity: 0; }

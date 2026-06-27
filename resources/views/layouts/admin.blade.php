@@ -12,7 +12,7 @@
         .sidebar-item { transition: all 0.2s ease; }
         .sidebar-item:hover, .sidebar-item.active { background: rgba(99,102,241,0.15); color: #818cf8; }
         .sidebar-item.active { border-right: 3px solid #6366f1; }
-        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
         .fade-in { animation: fadeIn 0.3s ease; }
         .stat-card { transition: all 0.3s ease; }
         .stat-card:hover { transform: translateY(-2px); }

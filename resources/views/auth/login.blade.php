@@ -24,13 +24,13 @@
             border-radius: 50%; pointer-events: none;
             animation: drift2 20s ease-in-out infinite;
         }
-        @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(3%,4%)} }
-        @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-3%,-3%)} }
+        @@keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(3%,4%)} }
+        @@keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-3%,-3%)} }
 
-        @keyframes floatLogo { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-8px) rotate(1deg)} }
+        @@keyframes floatLogo { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-8px) rotate(1deg)} }
         .float-logo { animation: floatLogo 4s ease-in-out infinite; }
 
-        @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        @@keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
         .slide-up { animation: slideUp 0.6s ease forwards; }
         .delay-1 { animation-delay: 0.1s; opacity:0; }
         .delay-2 { animation-delay: 0.2s; opacity:0; }
