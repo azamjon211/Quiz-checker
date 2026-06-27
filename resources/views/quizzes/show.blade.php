@@ -49,7 +49,7 @@
                 <div class="flex items-center gap-3 mt-1.5">
                     <div class="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
                         <div class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-500 progress-glow"
-                             :style="`width: ${{{ $total }} > 0 ? Math.round((countAnswered()/{{ $total }})*100) : 0}%`"></div>
+                             :style="'width: ' + ({{ $total }} > 0 ? Math.round((countAnswered()/{{ $total }})*100) : 0) + '%'"></div>
                     </div>
                     <span class="text-slate-400 text-xs flex-shrink-0 font-medium tabular-nums">
                         <span x-text="countAnswered()"></span>/{{ $total }}
