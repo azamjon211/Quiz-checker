@@ -9,33 +9,30 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // SQLite enum'ni o'zgartirib bo'lmaydi, shuning uchun rename/rebuild usuli
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('role_new')->default('user');
-        });
-
-        DB::statement('UPDATE users SET role_new = role');
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
-        });
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('role_new', 'role');
-        });
+        if (DB::getDriverName() === 'sqlite') {
+            // SQLite ALTER COLUMN qo'llab-quvvatlamaydi
+            Schema::table('users', function (Blueprint $table) {
+                $table->string('role_new')->default('user');
+            });
+            DB::statement('UPDATE users SET role_new = role');
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropColumn('role');
+            });
+            Schema::table('users', function (Blueprint $table) {
+                $table->renameColumn('role_new', 'role');
+            });
+        } else {
+            // PostgreSQL / MySQL
+            Schema::table('users', function (Blueprint $table) {
+                $table->string('role')->default('user')->change();
+            });
+        }
     }
 
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('role_back', ['admin', 'user', 'superadmin'])->default('user');
-        });
-        DB::statement('UPDATE users SET role_back = role');
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
-        });
-        Schema::table('users', function (Blueprint $table) {
-            $table->renameColumn('role_back', 'role');
+            $table->string('role')->default('user')->change();
         });
     }
 };
