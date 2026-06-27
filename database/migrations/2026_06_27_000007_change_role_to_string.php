@@ -10,7 +10,6 @@ return new class extends Migration
     public function up(): void
     {
         if (DB::getDriverName() === 'sqlite') {
-            // SQLite ALTER COLUMN qo'llab-quvvatlamaydi
             Schema::table('users', function (Blueprint $table) {
                 $table->string('role_new')->default('user');
             });
@@ -22,7 +21,8 @@ return new class extends Migration
                 $table->renameColumn('role_new', 'role');
             });
         } else {
-            // PostgreSQL / MySQL
+            // CHECK constraint ni olib tashlash (enum dan qolgan)
+            DB::statement('ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check');
             Schema::table('users', function (Blueprint $table) {
                 $table->string('role')->default('user')->change();
             });
