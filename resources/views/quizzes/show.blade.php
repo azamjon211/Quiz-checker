@@ -121,8 +121,8 @@
                     </span>
 
                     @if($isAbcdType)
-                    {{-- Option buttons --}}
-                    <div class="flex gap-1.5 flex-shrink-0">
+                    {{-- ABCD buttons only — no text input --}}
+                    <div class="flex gap-1.5 flex-1">
                         <button type="button" @click="pick('{{ $n }}', 'A')"
                                 class="opt-btn opt-btn-a"
                                 :class="answers['{{ $n }}'] === 'A' ? 'sel' : ''">A</button>
@@ -136,17 +136,16 @@
                                 class="opt-btn opt-btn-d"
                                 :class="answers['{{ $n }}'] === 'D' ? 'sel' : ''">D</button>
                     </div>
-                    <span class="text-slate-700 text-xs flex-shrink-0">yoki</span>
-                    @endif
-
-                    {{-- Text input --}}
+                    @else
+                    {{-- Text input only — no ABCD buttons --}}
                     <input type="text"
                            :value="answers['{{ $n }}'] || ''"
                            @input="type('{{ $n }}', $event.target.value)"
-                           placeholder="{{ $isAbcdType ? 'so\'z...' : 'javob...' }}"
+                           placeholder="javob..."
                            autocomplete="off"
-                           class="flex-1 min-w-0 bg-slate-900/40 border border-slate-700/60 rounded-lg px-3 py-{{ $isAbcdType ? '1.5' : '2' }} text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-slate-500 transition"
-                           :class="answers['{{ $n }}'] && !isAbcd(answers['{{ $n }}']) ? 'text-input-answered' : ''">
+                           class="flex-1 min-w-0 bg-slate-900/40 border border-slate-700/60 rounded-lg px-3 py-2 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-slate-500 transition"
+                           :class="answers['{{ $n }}'] ? 'text-input-answered' : ''">
+                    @endif
 
                     <input type="hidden" name="answers[{{ $n }}]" :value="answers['{{ $n }}'] || ''">
 
