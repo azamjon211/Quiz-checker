@@ -32,7 +32,11 @@
 @endpush
 
 @section('content')
-@php $questions = $quiz->questions; $total = $quiz->question_count; @endphp
+@php
+    $questions = $quiz->questions;
+    $total = $quiz->question_count;
+    $hasAbcd = $questions->contains(fn($q) => in_array(strtoupper($q->correct_answer ?? ''), ['A','B','C','D']));
+@endphp
 
 <div class="max-w-2xl mx-auto px-4 py-10" x-data="quizForm()">
 
@@ -97,13 +101,16 @@
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
-                    Tugma yoki yozing
+                    {{ $hasAbcd ? 'Tugma yoki yozing' : 'Javob yozing' }}
                 </span>
             </div>
 
             <div class="space-y-2">
                 @foreach($questions as $q)
-                @php $n = $q->question_number; @endphp
+                @php
+                    $n = $q->question_number;
+                    $isAbcdType = in_array(strtoupper($q->correct_answer ?? ''), ['A','B','C','D']);
+                @endphp
 
                 <div class="q-row flex items-center gap-3 px-3 py-2.5 rounded-xl border border-slate-800/60"
                      :class="answers['{{ $n }}'] ? 'answered' : ''">
@@ -113,6 +120,7 @@
                         {{ $n }}
                     </span>
 
+                    @if($isAbcdType)
                     {{-- Option buttons --}}
                     <div class="flex gap-1.5 flex-shrink-0">
                         <button type="button" @click="pick('{{ $n }}', 'A')"
@@ -128,15 +136,16 @@
                                 class="opt-btn opt-btn-d"
                                 :class="answers['{{ $n }}'] === 'D' ? 'sel' : ''">D</button>
                     </div>
-
                     <span class="text-slate-700 text-xs flex-shrink-0">yoki</span>
+                    @endif
 
-                    {{-- Free text --}}
+                    {{-- Text input --}}
                     <input type="text"
                            :value="answers['{{ $n }}'] || ''"
                            @input="type('{{ $n }}', $event.target.value)"
-                           placeholder="so'z..."
-                           class="flex-1 min-w-0 bg-slate-900/40 border border-slate-700/60 rounded-lg px-3 py-1.5 text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-slate-500 transition"
+                           placeholder="{{ $isAbcdType ? 'so\'z...' : 'javob...' }}"
+                           autocomplete="off"
+                           class="flex-1 min-w-0 bg-slate-900/40 border border-slate-700/60 rounded-lg px-3 py-{{ $isAbcdType ? '1.5' : '2' }} text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:border-slate-500 transition"
                            :class="answers['{{ $n }}'] && !isAbcd(answers['{{ $n }}']) ? 'text-input-answered' : ''">
 
                     <input type="hidden" name="answers[{{ $n }}]" :value="answers['{{ $n }}'] || ''">
