@@ -26,6 +26,7 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
     Route::resource('quizzes', AdminQuizController::class)->except(['show']);
     Route::get('submissions', [AdminSubmissionController::class, 'index'])->name('submissions.index');
     Route::get('submissions/{submission}', [AdminSubmissionController::class, 'show'])->name('submissions.show');
+    Route::delete('submissions/{submission}', [AdminSubmissionController::class, 'destroy'])->name('submissions.destroy')->middleware('throttle:admin-delete');
 
     // Superadmin only
     Route::middleware('superadmin')->group(function () {

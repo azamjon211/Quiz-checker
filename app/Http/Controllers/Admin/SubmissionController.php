@@ -24,4 +24,11 @@ class SubmissionController extends Controller
         $submission->load(['quiz', 'answers']);
         return view('admin.submissions.show', compact('submission'));
     }
+    public function destroy(Submission $submission)
+    {
+        $submission->delete();
+
+        return redirect()->route('admin.submissions.index')
+            ->with('success', 'Natija muvaffaqiyatli o\'chirildi.');
+    }
 }

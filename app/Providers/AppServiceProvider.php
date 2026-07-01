@@ -21,5 +21,10 @@ class AppServiceProvider extends ServiceProvider
                     ->withInput($request->only('email'))
                 );
         });
+        RateLimiter::for('admin-delete', function (Request $request) {
+            return Limit::perMinute(30)
+                ->by($request->ip())
+                ->response(fn() => back()->with('error', 'Juda ko\'p o\'chirish so\'rovi. 1 daqiqadan so\'ng qayta urinib ko\'ring.'));
+        });
     }
 }
